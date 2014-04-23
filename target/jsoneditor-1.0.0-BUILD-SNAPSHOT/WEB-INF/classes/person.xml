@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBAT IS.com//D TD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd"> 
+<sqlMap namespace="Person">
+	<select id="getPerson" parameterClass="map" resultClass="org.demo.domain.Person">
+		select per_id as id,
+		per_name as name,
+		per_password as password
+		from person
+		 <dynamic prepend="WHERE"> 
+			<isNotNull prepend="and" property="id">
+				per_id=#id#
+			</isNotNull>
+			<isNotNull prepend="and" property="name">
+				per_name=#name#
+			</isNotNull>
+			<isNotNull prepend="and" property="password">
+				per_password=#password#
+			</isNotNull>
+		 </dynamic>
+	</select>
+	<insert id="insertPerson" parameterClass="org.demo.domain.Person">
+		insert into person (per_id,per_name,per_password)
+		values(#id#,#name#,#password#)
+	</insert>
+	<update id="updatePerson" parameterClass="org.demo.domain.Person">
+		update person 
+		set per_name=#name#,per_password=#password#
+		where per_id=#id#
+	</update>
+	<delete id="deletePerson" parameterClass="org.demo.domain.Person">
+		delete from person where per_id=#id#
+	</delete>
+	
+</sqlMap>

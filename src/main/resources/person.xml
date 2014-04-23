@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper  namespace="cn.edu.sdu.qlsc.yh.test.IPersonDao">
+	<select id="select" parameterType="string" resultType="cn.edu.sdu.qlsc.yh.test.Person">
+		select per_id as id,
+		per_name as name,
+		per_password as password
+		from person
+		where id = #{id} 
+		 <!-- <dynamic prepend="WHERE"> 
+			<isNotNull prepend="and" property="id">
+				per_id=#{id}
+			</isNotNull>
+			<isNotNull prepend="and" property="name">
+				per_name=#{name}
+			</isNotNull>
+			<isNotNull prepend="and" property="password">
+				per_password=#{password}
+			</isNotNull>
+		 </dynamic> -->
+	</select>
+	<insert id="insert" parameterType="cn.edu.sdu.qlsc.yh.test.Person">
+		insert into person (per_id,per_name,per_password)
+		values(#{id},#{name},#{password})
+	</insert>
+	<!-- <update id="updatePerson" parameterType="cn.edu.sdu.qlsc.yh.test.Person">
+		update person 
+		set per_name=#{name},per_password=#{password}
+		where per_id=#{id}
+	</update>
+	<delete id="deletePerson" parameterType="cn.edu.sdu.qlsc.yh.test.Person">
+		delete from person where per_id=#{id}
+	</delete> -->
+	
+</mapper >
