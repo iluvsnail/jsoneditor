@@ -6,7 +6,7 @@
 		per_name as name,
 		per_password as password
 		from person
-		where id = #{id} 
+		where per_id = #{id} 
 		 <!-- <dynamic prepend="WHERE"> 
 			<isNotNull prepend="and" property="id">
 				per_id=#{id}

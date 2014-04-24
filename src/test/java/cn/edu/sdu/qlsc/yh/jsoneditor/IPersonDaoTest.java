@@ -1,5 +1,8 @@
 package cn.edu.sdu.qlsc.yh.jsoneditor;
 
+import junit.framework.Assert;
+import junit.framework.TestCase;
+
 import org.apache.ibatis.session.SqlSession;
 import org.junit.After;
 import org.junit.Before;
@@ -9,7 +12,7 @@ import cn.edu.sdu.qlsc.yh.test.IPersonDao;
 import cn.edu.sdu.qlsc.yh.test.Person;
 import cn.edu.sdu.qlsc.yh.test.SqlMapUtils;
 
-public class IPersonDaoTest {
+public class IPersonDaoTest{
 	IPersonDao studentMapper;
 	SqlSession session;
 	@Before
@@ -17,7 +20,7 @@ public class IPersonDaoTest {
 		session = SqlMapUtils.getInstance().getSession();
 		studentMapper = session.getMapper(IPersonDao.class);
 	}
-	@Test
+	//@Test
 	public void testInsert(){
 		Person student = new Person();
 		student.setPassword("123");
@@ -28,10 +31,14 @@ public class IPersonDaoTest {
 		
 	}
 
-	//@Test
+	@Test
 	public void testFind(){
-		Person student  = studentMapper.select("123");
-		System.out.println(student.getName());
+		Person student = new Person();
+		student.setPassword("123");
+		student.setName("luce");
+		student.setId("1");
+		Person student2  = studentMapper.select("1");
+		Assert.assertEquals("测试成功",student.getName(), student2.getName());
 	}
 
 	
